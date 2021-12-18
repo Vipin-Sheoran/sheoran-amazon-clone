@@ -1,24 +1,32 @@
-import React,{useEffect} from 'react';
+import React,{useEffect,useState} from 'react';
 import './App.css';
-import Header from './Header'
-import Home from './Home'
+import Header from './components/header/Header'
+import Home from './containers/home/Home'
 import {BrowserRouter as Router,Switch,Route} from 'react-router-dom'
-import Checkout from './Checkout'
-import Login from './Login'
-import {auth} from './firebase'
-import {useStateValue} from './StateProvider'
-import Payment from './Payment'
+import Checkout from './containers/checkout/Checkout'
+import Login from './containers/login/Login'
+import {auth} from './components/firebase/firebase'
+import {useStateValue} from './reducer/StateProvider'
+import Payment from './containers/payment/Payment'
 import {loadStripe} from '@stripe/stripe-js'
 import {Elements} from '@stripe/react-stripe-js'
-import SlideZoom from './zoomout'
-import Orders from './Orders'
-import Slideshow from './slideshow'
+import SlideZoom from './components/zoomout/zoomout'
+import Orders from './containers/orders/Orders'
+
 
 const promise=loadStripe('pk_test_51HRr6IFrqO60PvxDSdtrsXSXHpUjlotvPryWZAx8HZo6AYk39vxjgdUOT2MKEm9iOHUmy5lLKf7khSDa0AmYDRnG00a0BkWqeh')
 
 function App() {
-
+  const [closed,setClosed]=useState(false)
   const [{},dispatch]=useStateValue()
+
+  const backdropClosedHandler=()=>{
+    setClosed(false)
+  }
+
+  const backdropOpenhandler=()=>{
+    setClosed(true)
+  }
 
   useEffect(() => {
     //this authuser will exists until we signout
@@ -68,6 +76,7 @@ function App() {
           <Checkout/>
           </Route>
           <Route path='/'>
+  
           <Header/>
           <SlideZoom/>
           {/* <Slideshow /> */}

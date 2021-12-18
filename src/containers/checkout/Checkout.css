@@ -1,0 +1,29 @@
+.checkout__ad{
+    width: 100%;
+    margin-bottom: 10px;
+    height: 25vh;
+}
+.checkout{
+    display: flex;
+    background-color: white;
+    height: max-content; 
+    padding: 20px; 
+}
+
+@media(max-width:480px){
+    .checkout__ad{
+        width: 100%;
+        object-fit: contain;
+    }
+    .checkout__title{
+        font-size: 10px;
+    }
+
+    .checkout__right{
+        width: 322px;
+    }
+    .checkout{
+        display: flex;
+        flex-direction: column;
+    }
+}
